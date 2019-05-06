@@ -1,0 +1,83 @@
+html,
+body {
+  background: #111;
+  color: #fff;
+  font-family: 'Orbitron';
+}
+
+body {
+  padding: 2em;
+}
+
+#scores {
+  display: block;
+
+  #home {
+    float: left;
+    text-align: left;
+  }
+  #away {
+    float: right;
+    text-align: right;
+  }
+
+  .team-name {
+
+  }
+  .score {
+    font-size: 3em;
+  }
+  .timeouts {
+    font-size: 1em;
+
+    &:before {
+      content: 'Timeouts: ';
+    }
+  }
+  .jammer {
+    &:before {
+      content: 'Jammer: ';
+    }
+  }
+}
+
+#times {
+  max-width: 50%;
+  margin: 0 auto;
+  text-align: center;
+
+  #period {
+    .label {
+      &:before {
+        content: 'Period ';
+      }
+    }
+    .time {
+
+    }
+  }
+  #jam {
+    .label {
+      &:before {
+        content: 'Jam ';
+      }
+    }
+    .time {
+
+    }
+  }
+
+  .label {
+    font-size: 2em;
+  }
+  .time {
+    background: #fff;
+    color: #111;
+    font-size: 3em;
+    padding: 0.5em 0.5em 0.25em;
+    width: 3em;
+    text-align: right;
+    margin: 0.25em auto 1em;
+    line-height: 0.5;
+  }
+}
