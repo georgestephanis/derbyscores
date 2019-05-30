@@ -1,7 +1,10 @@
 
 import './derbyscores.scss';
 
-class Scoreboard extends React.Component {
+import Scoreboard from './components/Scoreboard';
+import Dashboard from './components/Dashboard';
+
+class DerbyScores extends React.Component {
 
 	constructor() {
 		super();
@@ -50,64 +53,12 @@ class Scoreboard extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <section id="scores">
-          <div id="home">
-            <Score { ...this.state.scoresHome } />
-          </div>
-          <div id="away">
-            <Score { ...this.state.scoresAway } />
-          </div>
-        </section>
-
-        <section id="times">
-          <div id="period">
-            <Clock { ...this.state.timesPeriod } />
-          </div>
-          <div id="jam">
-            <Clock { ...this.state.timesJam } />
-          </div>
-        </section>
-      </React.Fragment>
+      <Dashboard { ...this.state } />
     )
   }
 }
 
-function Score( props ) {
-  return (
-    <React.Fragment>
-      <div className="team-name">
-        { props.team_name }
-      </div>
-      <div className="score">
-        { props.score }
-      </div>
-      <div className="timeouts">
-        { props.timeouts }
-      </div>
-      <div className="jammer">
-        { props.jammer }
-      </div>
-    </React.Fragment>
-  );
-}
-
-function Clock( props ) {
-  let min = Math.floor( props.time / 60 ),
-      sec = props.time % 60;
-  return (
-    <React.Fragment>
-      <div className="label">
-        { props.label }
-      </div>
-      <div className="time">
-        { min + ':' + sec.toString(10).padStart(2,'0') }
-      </div>
-    </React.Fragment>
-  );
-}
-
 ReactDOM.render(
-  <Scoreboard />,
+  <DerbyScores />,
   document.getElementById('root')
 );
