@@ -1,10 +1,15 @@
 {
   "name": "derby-scores",
   "scripts": {
-    "build": "parcel build src/derbyscores.jsx"
+    "build": "parcel build src/derbyscores.jsx --no-minify"
   },
   "devDependencies": {
     "parcel-bundler": "^1.10.1",
     "sass": "^1.15.1"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-new-window": "^0.1.1"
   }
 }

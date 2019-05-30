@@ -1,4 +1,8 @@
 
+import React from 'react';
+import { render } from "react-dom";
+import NewWindow from 'react-new-window';
+
 import './derbyscores.scss';
 
 import Scoreboard from './components/Scoreboard';
@@ -53,12 +57,17 @@ class DerbyScores extends React.Component {
 
   render() {
     return (
-      <Dashboard { ...this.state } />
+      <React.Fragment>
+        <Dashboard { ...this.state } />
+        <NewWindow name="ScoreboardWindow" >
+          <Scoreboard { ...this.state } />
+        </NewWindow>
+      </React.Fragment>
     )
   }
 }
 
-ReactDOM.render(
+render(
   <DerbyScores />,
   document.getElementById('root')
 );

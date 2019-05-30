@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 function Clock( props ) {
 	let min = Math.floor( props.time / 60 ),
 	sec = props.time % 60;

@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 import Score from './Score';
 import Clock from './Clock';
 

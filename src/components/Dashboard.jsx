@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 import Score from './Score';
 import Clock from './Clock';
 
@@ -11,6 +13,7 @@ class Dashboard extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
+				<h1>Dashboard</h1>
 				<section id="scores">
 					<div id="home">
 						<Score { ...this.props.scoresHome } />
