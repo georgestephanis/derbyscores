@@ -1,8 +1,8 @@
 
 import React from 'react';
 
-import Score from './Score';
-import Clock from './Clock';
+import ScoreControl from './ScoreControl';
+import ClockControl from './ClockControl';
 
 class Dashboard extends React.Component {
 
@@ -16,19 +16,19 @@ class Dashboard extends React.Component {
 				<h1>Dashboard</h1>
 				<section id="scores">
 					<div id="home">
-						<Score { ...this.props.scoresHome } />
+						<ScoreControl which="scoresHome" { ...this.props } />
 					</div>
 					<div id="away">
-						<Score { ...this.props.scoresAway } />
+						<ScoreControl which="scoresAway" { ...this.props } />
 					</div>
 				</section>
 
 				<section id="times">
 					<div id="period">
-						<Clock { ...this.props.timesPeriod } />
+						<ClockControl which="timesPeriod" { ...this.props } />
 					</div>
 					<div id="jam">
-						<Clock { ...this.props.timesJam } />
+						<ClockControl which="timesJam" { ...this.props } />
 					</div>
 				</section>
 			</React.Fragment>

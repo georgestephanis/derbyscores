@@ -58,7 +58,7 @@ class DerbyScores extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Dashboard { ...this.state } />
+        <Dashboard setState={ this.setState } state={ this.state } />
         <NewWindow name="ScoreboardWindow" >
           <Scoreboard { ...this.state } />
         </NewWindow>
