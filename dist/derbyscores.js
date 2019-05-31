@@ -1065,7 +1065,7 @@ function Scoreboard(props) {
 
 var _default = Scoreboard;
 exports.default = _default;
-},{"react":"1n8/","./Score":"cniy","./Clock":"UW54"}],"aVFp":[function(require,module,exports) {
+},{"react":"1n8/","./Score":"cniy","./Clock":"UW54"}],"xZ4Z":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1075,13 +1075,77 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Score = _interopRequireDefault(require("./Score"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _Clock = _interopRequireDefault(require("./Clock"));
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function ScoreControl(props) {
+  var newState = {};
+  newState[props.which] = {
+    score: props.state[props.which].score + 1
+  };
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+    className: "team-name"
+  }, props.state[props.which].team_name), _react.default.createElement("div", {
+    className: "score"
+  }, props.state[props.which].score, _react.default.createElement("button", {
+    onClick: function onClick() {
+      return props.setState(_objectSpread({}, newState, props.state));
+    }
+  }, "+1")), _react.default.createElement("div", {
+    className: "timeouts"
+  }, props.state[props.which].timeouts), _react.default.createElement("div", {
+    className: "jammer"
+  }, props.state[props.which].jammer));
+}
+
+var _default = ScoreControl;
+exports.default = _default;
+},{"react":"1n8/"}],"QM0P":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ClockControl(props) {
+  var min = Math.floor(props.state[props.which].time / 60),
+      sec = props.state[props.which].time % 60;
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+    className: "label"
+  }, props.state[props.which].label), _react.default.createElement("div", {
+    className: "time"
+  }, min + ':' + sec.toString(10).padStart(2, '0')));
+}
+
+var _default = ClockControl;
+exports.default = _default;
+},{"react":"1n8/"}],"aVFp":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _ScoreControl = _interopRequireDefault(require("./ScoreControl"));
+
+var _ClockControl = _interopRequireDefault(require("./ClockControl"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1117,15 +1181,23 @@ function (_React$Component) {
         id: "scores"
       }, _react.default.createElement("div", {
         id: "home"
-      }, _react.default.createElement(_Score.default, this.props.scoresHome)), _react.default.createElement("div", {
+      }, _react.default.createElement(_ScoreControl.default, _extends({
+        which: "scoresHome"
+      }, this.props))), _react.default.createElement("div", {
         id: "away"
-      }, _react.default.createElement(_Score.default, this.props.scoresAway))), _react.default.createElement("section", {
+      }, _react.default.createElement(_ScoreControl.default, _extends({
+        which: "scoresAway"
+      }, this.props)))), _react.default.createElement("section", {
         id: "times"
       }, _react.default.createElement("div", {
         id: "period"
-      }, _react.default.createElement(_Clock.default, this.props.timesPeriod)), _react.default.createElement("div", {
+      }, _react.default.createElement(_ClockControl.default, _extends({
+        which: "timesPeriod"
+      }, this.props))), _react.default.createElement("div", {
         id: "jam"
-      }, _react.default.createElement(_Clock.default, this.props.timesJam))));
+      }, _react.default.createElement(_ClockControl.default, _extends({
+        which: "timesJam"
+      }, this.props)))));
     }
   }]);
 
@@ -1134,7 +1206,7 @@ function (_React$Component) {
 
 var _default = Dashboard;
 exports.default = _default;
-},{"react":"1n8/","./Score":"cniy","./Clock":"UW54"}],"ojbp":[function(require,module,exports) {
+},{"react":"1n8/","./ScoreControl":"xZ4Z","./ClockControl":"QM0P"}],"ojbp":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -1229,7 +1301,14 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Dashboard.default, this.state), _react.default.createElement(_reactNewWindow.default, {
+      return _react.default.createElement(_Dashboard.default, {
+        setState: this.setState,
+        state: this.state
+      });
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Dashboard.default, {
+        setState: this.setState,
+        state: this.state
+      }), _react.default.createElement(_reactNewWindow.default, {
         name: "ScoreboardWindow"
       }, _react.default.createElement(_Scoreboard.default, this.state)));
     }
