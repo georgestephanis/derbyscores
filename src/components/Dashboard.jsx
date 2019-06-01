@@ -16,10 +16,10 @@ class Dashboard extends React.Component {
 				<h1>Dashboard</h1>
 				<section id="scores">
 					<div id="home">
-						<ScoreControl which="scoresHome" { ...this.props } />
+						<ScoreControl whichTeam="scoresHome" { ...this.props } />
 					</div>
 					<div id="away">
-						<ScoreControl which="scoresAway" { ...this.props } />
+						<ScoreControl whichTeam="scoresAway" { ...this.props } />
 					</div>
 				</section>
 

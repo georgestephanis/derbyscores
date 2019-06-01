@@ -1,26 +1,27 @@
 
 import React from 'react';
 
-function ScoreControl( props ) {
-	let newState = {};
-	newState[ props.which ] = {
-		score: props.state[ props.which ].score + 1
-	}
+import IncrementButton from './IncrementButton';
 
+function ScoreControl( props ) {
+	const state = { ...props.state };
 	return (
 	  <React.Fragment>
 			<div className="team-name">
-				{ props.state[ props.which ].team_name }
+				{ state[ props.whichTeam ].team_name }
 			</div>
 			<div className="score">
-				{ props.state[ props.which ].score }
-				<button onClick={ () => props.setState( { ...newState, ...props.state } ) }>+1</button>
+				<IncrementButton type="-" whichProperty="score" { ...props } />
+				{ state[ props.whichTeam ].score }
+				<IncrementButton type="+" whichProperty="score" { ...props } />
 			</div>
 			<div className="timeouts">
-				{ props.state[ props.which ].timeouts }
+				<IncrementButton type="-" whichProperty="timeouts" { ...props } />
+				{ state[ props.whichTeam ].timeouts }
+				<IncrementButton type="+" whichProperty="timeouts" { ...props } />
 			</div>
 			<div className="jammer">
-				{ props.state[ props.which ].jammer }
+				{ state[ props.whichTeam ].jammer }
 			</div>
 	  </React.Fragment>
 	);
