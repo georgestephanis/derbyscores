@@ -1,6 +1,6 @@
 html,
 body {
-  background: #111;
+  background: #444;
   color: #fff;
   font-family: 'Inconsolata', monospace;
 }
@@ -21,6 +21,22 @@ body {
     text-align: right;
   }
 
+  button {
+    border: 0;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    padding: 0 0.1em 0 0;
+    font-size: 70%;
+    font-weight: 900;
+    margin: 0;
+    &:first-child {
+      margin-right: 0.25em;
+    }
+    &:last-child {
+      margin-left: 0.25em;
+    }
+  }
   .team-name {
 
   }

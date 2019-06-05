@@ -14,6 +14,18 @@ class Dashboard extends React.Component {
 		return (
 			<React.Fragment>
 				<h1>Dashboard</h1>
+				<button onClick={ this.props.derbyScores.timeIn }>
+					Time In!
+				</button>
+				<button onClick={ this.props.derbyScores.timeOut }>
+					Time Out!
+				</button>
+				<button onClick={ this.props.derbyScores.nextJam }>
+					Next Jam
+				</button>
+				<button onClick={ this.props.derbyScores.startNextPeriod }>
+					Next Period
+				</button>
 				<section id="scores">
 					<div id="home">
 						<ScoreControl whichTeam="scoresHome" { ...this.props } />

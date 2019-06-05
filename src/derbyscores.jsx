@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { render } from "react-dom";
+import { render } from 'react-dom';
 import NewWindow from 'react-new-window';
 
 import './derbyscores.scss';
@@ -13,64 +13,106 @@ class DerbyScores extends React.Component {
 	constructor() {
 		super();
 
-    this.state = {
-      scoresHome: {
-        team_name: "Home Team",
-        score: 33,
-        timeouts: 2,
-        jammer: "LadyJelly",
-      },
-      scoresAway: {
-        team_name: "Away Team",
-        score: 44,
-        timeouts: 1,
-        jammer: "AwayJamBerry",
-      },
-      timesPeriod: {
-        label: 1,
-        time: 210,
-      },
-      timesJam: {
-        label: 7,
-        time: 67,
-      },
-    };
+		this.state = {
+			scoresHome: {
+				team_name: "Home Team",
+				score: 33,
+				timeouts: 2,
+				jammer: "LadyJelly",
+				jammers: [],
+			},
+			scoresAway: {
+				team_name: "Away Team",
+				score: 44,
+				timeouts: 1,
+				jammer: "AwayJamBerry",
+				jammers: [],
+			},
+			timesPeriod: {
+				label: 1,
+				time: 210,
+			},
+			timesJam: {
+				label: 7,
+				time: 67,
+			},
+		};
 
-    this.tick = this.tick.bind( this );
+		this.setState = this.setState.bind( this );
 
-    this.intervalHandle = setInterval( this.tick, 1000 );
+		this.startNextPeriod = this.startNextPeriod.bind( this );
+		this.nextJam   = this.nextJam.bind( this );
+		this.tick      = this.tick.bind( this );
+		this.timeOut   = this.timeOut.bind( this );
+		this.timeIn    = this.timeIn.bind( this );
+
+		this.timeIn()
+	}
+	
+	startNextPeriod() {
+		let state = { ...this.state };
+
+		state.timesPeriod.label++;
+		state.timesPeriod.time = ( 30 * 60 );
+
+		state.timesJam.label = 1;
+		state.timesJam.time = ( 2 * 60 );
+
+		this.setState( state );
 	}
 
-  tick() {
-    let state = { ...this.state }
+	nextJam() {
+		let state = { ...this.state };
 
-    if ( state.timesPeriod.time > 0 ) {
-      state.timesPeriod.time--;
-    }
-    if ( state.timesJam.time > 0 ) {
-      state.timesJam.time--;
+		state.timesJam.label++;
+		state.timesJam.time = ( 2 * 60 );
 
-    }
+		this.setState( state );
+	}
 
-    this.setState( state );
-  }
+	tick() {
+		let state = { ...this.state };
 
-  render() {
-	return (
-        <Dashboard setState={ this.setState.bind( this ) } state={ this.state } />
-	);
-    return (
-      <React.Fragment>
-        <Dashboard setState={ this.setState.bind( this ) } state={ this.state } />
-        <NewWindow name="ScoreboardWindow" >
-          <Scoreboard { ...this.state } />
-        </NewWindow>
-      </React.Fragment>
-    )
-  }
+		if ( state.timesPeriod.time > 0 ) {
+			state.timesPeriod.time--;
+		}
+		if ( state.timesJam.time > 0 ) {
+			state.timesJam.time--;
+
+		}
+
+		this.setState( state );
+	}
+
+	timeOut() {
+		if ( this.intervalHandle ) {
+			clearInterval( this.intervalHandle );
+			this.intervalHandle = 0;
+		}
+	}
+
+	timeIn() {
+		if ( ! this.intervalHandle ) {
+			this.intervalHandle = setInterval( this.tick, 1000 );
+		}
+	}
+
+	render() {
+		return (
+			<Dashboard derbyScores={ this } setState={ this.setState } state={ this.state } />
+		);
+		return (
+			<React.Fragment>
+				<Dashboard derbyScores={ this } setState={ this.setState.bind( this ) } state={ this.state } />
+				<NewWindow name="ScoreboardWindow" >
+					<Scoreboard { ...this.state } />
+				</NewWindow>
+			</React.Fragment>
+		)
+	}
 }
 
 render(
-  <DerbyScores />,
-  document.getElementById('root')
+	<DerbyScores />,
+	document.getElementById('root')
 );

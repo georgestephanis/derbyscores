@@ -20,9 +20,17 @@ class IncrementButton extends React.Component {
 	}
 	
 	render() {
+		const props = this.props;
+		if ( '-' === props.type && props.state[ props.whichTeam ][ props.whichProperty ] <= 0 ) {
+			return (
+				<button disabled>
+					{ '-' === props.type ? '-1' : '+1' }
+				</button>
+			)
+		}
 		return (
 			<button onClick={ this.handleClick.bind( this ) }>
-				{ '-' === this.props.type ? '-1' : '+1' }
+				{ '-' === props.type ? '-1' : '+1' }
 			</button>
 		)
 	}

@@ -1119,9 +1119,17 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var props = this.props;
+
+      if ('-' === props.type && props.state[props.whichTeam][props.whichProperty] <= 0) {
+        return _react.default.createElement("button", {
+          disabled: true
+        }, '-' === props.type ? '-1' : '+1');
+      }
+
       return _react.default.createElement("button", {
         onClick: this.handleClick.bind(this)
-      }, '-' === this.props.type ? '-1' : '+1');
+      }, '-' === props.type ? '-1' : '+1');
     }
   }]);
 
@@ -1252,7 +1260,15 @@ function (_React$Component) {
   _createClass(Dashboard, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h1", null, "Dashboard"), _react.default.createElement("section", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h1", null, "Dashboard"), _react.default.createElement("button", {
+        onClick: this.props.derbyScores.timeIn
+      }, "Time In!"), _react.default.createElement("button", {
+        onClick: this.props.derbyScores.timeOut
+      }, "Time Out!"), _react.default.createElement("button", {
+        onClick: this.props.derbyScores.nextJam
+      }, "Next Jam"), _react.default.createElement("button", {
+        onClick: this.props.derbyScores.startNextPeriod
+      }, "Next Period"), _react.default.createElement("section", {
         id: "scores"
       }, _react.default.createElement("div", {
         id: "home"
@@ -1336,13 +1352,15 @@ function (_React$Component) {
         team_name: "Home Team",
         score: 33,
         timeouts: 2,
-        jammer: "LadyJelly"
+        jammer: "LadyJelly",
+        jammers: []
       },
       scoresAway: {
         team_name: "Away Team",
         score: 44,
         timeouts: 1,
-        jammer: "AwayJamBerry"
+        jammer: "AwayJamBerry",
+        jammers: []
       },
       timesPeriod: {
         label: 1,
@@ -1353,12 +1371,39 @@ function (_React$Component) {
         time: 67
       }
     };
+    _this.setState = _this.setState.bind(_assertThisInitialized(_this));
+    _this.startNextPeriod = _this.startNextPeriod.bind(_assertThisInitialized(_this));
+    _this.nextJam = _this.nextJam.bind(_assertThisInitialized(_this));
     _this.tick = _this.tick.bind(_assertThisInitialized(_this));
-    _this.intervalHandle = setInterval(_this.tick, 1000);
+    _this.timeOut = _this.timeOut.bind(_assertThisInitialized(_this));
+    _this.timeIn = _this.timeIn.bind(_assertThisInitialized(_this));
+
+    _this.timeIn();
+
     return _this;
   }
 
   _createClass(DerbyScores, [{
+    key: "startNextPeriod",
+    value: function startNextPeriod() {
+      var state = _objectSpread({}, this.state);
+
+      state.timesPeriod.label++;
+      state.timesPeriod.time = 30 * 60;
+      state.timesJam.label = 1;
+      state.timesJam.time = 2 * 60;
+      this.setState(state);
+    }
+  }, {
+    key: "nextJam",
+    value: function nextJam() {
+      var state = _objectSpread({}, this.state);
+
+      state.timesJam.label++;
+      state.timesJam.time = 2 * 60;
+      this.setState(state);
+    }
+  }, {
     key: "tick",
     value: function tick() {
       var state = _objectSpread({}, this.state);
@@ -1374,13 +1419,30 @@ function (_React$Component) {
       this.setState(state);
     }
   }, {
+    key: "timeOut",
+    value: function timeOut() {
+      if (this.intervalHandle) {
+        clearInterval(this.intervalHandle);
+        this.intervalHandle = 0;
+      }
+    }
+  }, {
+    key: "timeIn",
+    value: function timeIn() {
+      if (!this.intervalHandle) {
+        this.intervalHandle = setInterval(this.tick, 1000);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement(_Dashboard.default, {
-        setState: this.setState.bind(this),
+        derbyScores: this,
+        setState: this.setState,
         state: this.state
       });
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Dashboard.default, {
+        derbyScores: this,
         setState: this.setState.bind(this),
         state: this.state
       }), _react.default.createElement(_reactNewWindow.default, {
