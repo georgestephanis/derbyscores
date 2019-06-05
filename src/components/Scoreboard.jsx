@@ -9,10 +9,10 @@ function Scoreboard( props ) {
 		<React.Fragment>
 		<section id="scores">
 			<div id="home">
-				<Score { ...props.home } />
+				<Score whichTeam="home" { ...props } />
 			</div>
 			<div id="away">
-				<Score { ...props.away } />
+				<Score whichTeam="away" { ...props } />
 			</div>
 		</section>
 	

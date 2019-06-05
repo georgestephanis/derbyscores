@@ -13,7 +13,6 @@ class Dashboard extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<h1>Dashboard</h1>
 				<button onClick={ this.props.derbyScores.timeIn }>
 					Time In!
 				</button>
