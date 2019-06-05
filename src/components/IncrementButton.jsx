@@ -23,13 +23,13 @@ class IncrementButton extends React.Component {
 		const props = this.props;
 		if ( '-' === props.type && props.state[ props.whichTeam ][ props.whichProperty ] <= 0 ) {
 			return (
-				<button disabled>
+				<button disabled className="circlebtn">
 					{ '-' === props.type ? '-1' : '+1' }
 				</button>
 			)
 		}
 		return (
-			<button onClick={ this.handleClick.bind( this ) }>
+			<button onClick={ this.handleClick.bind( this ) } className="circlebtn">
 				{ '-' === props.type ? '-1' : '+1' }
 			</button>
 		)

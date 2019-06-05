@@ -20,7 +20,7 @@ body {
   float: right;
   text-align: right;
 }
-#scores button {
+#scores button.circlebtn {
   border: 0;
   border-radius: 50%;
   width: 1.5em;
@@ -30,10 +30,10 @@ body {
   font-weight: 900;
   margin: 0;
 }
-#scores button:first-child {
+#scores button.circlebtn:first-child {
   margin-right: 0.25em;
 }
-#scores button:last-child {
+#scores button.circlebtn:last-child {
   margin-left: 0.25em;
 }
 #scores .score {
@@ -44,6 +44,13 @@ body {
 }
 #scores .timeouts:before {
   content: "Timeouts: ";
+}
+#scores .jammer button {
+  display: block;
+}
+#scores .jammer.lead {
+  color: #ff0;
+  font-weight: 900;
 }
 #scores .jammer:before {
   content: "Jammer: ";

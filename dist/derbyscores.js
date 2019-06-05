@@ -1052,9 +1052,9 @@ function Scoreboard(props) {
     id: "scores"
   }, _react.default.createElement("div", {
     id: "home"
-  }, _react.default.createElement(_Score.default, props.scoresHome)), _react.default.createElement("div", {
+  }, _react.default.createElement(_Score.default, props.home)), _react.default.createElement("div", {
     id: "away"
-  }, _react.default.createElement(_Score.default, props.scoresAway))), _react.default.createElement("section", {
+  }, _react.default.createElement(_Score.default, props.away))), _react.default.createElement("section", {
     id: "times"
   }, _react.default.createElement("div", {
     id: "period"
@@ -1123,12 +1123,14 @@ function (_React$Component) {
 
       if ('-' === props.type && props.state[props.whichTeam][props.whichProperty] <= 0) {
         return _react.default.createElement("button", {
-          disabled: true
+          disabled: true,
+          className: "circlebtn"
         }, '-' === props.type ? '-1' : '+1');
       }
 
       return _react.default.createElement("button", {
-        onClick: this.handleClick.bind(this)
+        onClick: this.handleClick.bind(this),
+        className: "circlebtn"
       }, '-' === props.type ? '-1' : '+1');
     }
   }]);
@@ -1180,8 +1182,12 @@ function ScoreControl(props) {
     type: "+",
     whichProperty: "timeouts"
   }, props))), _react.default.createElement("div", {
-    className: "jammer"
-  }, state[props.whichTeam].jammer));
+    className: 'jammer' + (state.leadJammer === props.whichTeam ? ' lead' : '')
+  }, state[props.whichTeam].jammer, !state.leadJammer && _react.default.createElement("button", {
+    onClick: function onClick() {
+      return props.derbyScores.setLeadJammer(props.whichTeam);
+    }
+  }, "Make Lead")));
 }
 
 var _default = ScoreControl;
@@ -1273,11 +1279,11 @@ function (_React$Component) {
       }, _react.default.createElement("div", {
         id: "home"
       }, _react.default.createElement(_ScoreControl.default, _extends({
-        whichTeam: "scoresHome"
+        whichTeam: "home"
       }, this.props))), _react.default.createElement("div", {
         id: "away"
       }, _react.default.createElement(_ScoreControl.default, _extends({
-        whichTeam: "scoresAway"
+        whichTeam: "away"
       }, this.props)))), _react.default.createElement("section", {
         id: "times"
       }, _react.default.createElement("div", {
@@ -1348,38 +1354,38 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DerbyScores).call(this));
     _this.state = {
-      scoresHome: {
-        team_name: "Home Team",
-        score: 33,
-        timeouts: 2,
-        jammer: "LadyJelly",
+      home: {
+        team_name: "HomeTeam Name",
+        score: 0,
+        timeouts: 3,
+        jammer: "HomeJammer Name",
         jammers: []
       },
-      scoresAway: {
-        team_name: "Away Team",
-        score: 44,
-        timeouts: 1,
-        jammer: "AwayJamBerry",
+      away: {
+        team_name: "AwayTeam Name",
+        score: 0,
+        timeouts: 3,
+        jammer: "AwayJammer Name",
         jammers: []
       },
+      leadJammer: null,
+      // null, 'home', or 'away'
       timesPeriod: {
         label: 1,
-        time: 210
+        time: 30 * 60
       },
       timesJam: {
-        label: 7,
-        time: 67
+        label: 1,
+        time: 2 * 60
       }
     };
-    _this.setState = _this.setState.bind(_assertThisInitialized(_this));
+    _this.setLeadJammer = _this.setLeadJammer.bind(_assertThisInitialized(_this));
     _this.startNextPeriod = _this.startNextPeriod.bind(_assertThisInitialized(_this));
     _this.nextJam = _this.nextJam.bind(_assertThisInitialized(_this));
     _this.tick = _this.tick.bind(_assertThisInitialized(_this));
     _this.timeOut = _this.timeOut.bind(_assertThisInitialized(_this));
     _this.timeIn = _this.timeIn.bind(_assertThisInitialized(_this));
-
-    _this.timeIn();
-
+    _this.setState = _this.setState.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1392,6 +1398,7 @@ function (_React$Component) {
       state.timesPeriod.time = 30 * 60;
       state.timesJam.label = 1;
       state.timesJam.time = 2 * 60;
+      state.leadJammer = null;
       this.setState(state);
     }
   }, {
@@ -1401,6 +1408,7 @@ function (_React$Component) {
 
       state.timesJam.label++;
       state.timesJam.time = 2 * 60;
+      state.leadJammer = null;
       this.setState(state);
     }
   }, {
@@ -1434,13 +1442,27 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "setLeadJammer",
+    value: function setLeadJammer(which) {
+      console.log(which);
+
+      var state = _objectSpread({}, this.state);
+
+      if ('home' !== which && 'away' !== which) {
+        which = null;
+      }
+
+      state.leadJammer = which;
+      this.setState(state);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement(_Dashboard.default, {
-        derbyScores: this,
-        setState: this.setState,
-        state: this.state
-      });
+      /*
+      return (
+      	<Dashboard derbyScores={ this } setState={ this.setState } state={ this.state } />
+      );
+      /**/
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Dashboard.default, {
         derbyScores: this,
         setState: this.setState.bind(this),

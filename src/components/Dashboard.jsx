@@ -28,10 +28,10 @@ class Dashboard extends React.Component {
 				</button>
 				<section id="scores">
 					<div id="home">
-						<ScoreControl whichTeam="scoresHome" { ...this.props } />
+						<ScoreControl whichTeam="home" { ...this.props } />
 					</div>
 					<div id="away">
-						<ScoreControl whichTeam="scoresAway" { ...this.props } />
+						<ScoreControl whichTeam="away" { ...this.props } />
 					</div>
 				</section>
 

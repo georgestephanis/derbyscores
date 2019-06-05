@@ -21,7 +21,7 @@ body {
     text-align: right;
   }
 
-  button {
+  button.circlebtn {
     border: 0;
     border-radius: 50%;
     width: 1.5em;
@@ -51,6 +51,14 @@ body {
     }
   }
   .jammer {
+    button {
+      display: block;
+    }
+
+    &.lead {
+      color: #ff0;
+      font-weight: 900;
+    }
     &:before {
       content: 'Jammer: ';
     }

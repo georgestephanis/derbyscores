@@ -14,41 +14,42 @@ class DerbyScores extends React.Component {
 		super();
 
 		this.state = {
-			scoresHome: {
-				team_name: "Home Team",
-				score: 33,
-				timeouts: 2,
-				jammer: "LadyJelly",
+			home: {
+				team_name: "HomeTeam Name",
+				score: 0,
+				timeouts: 3,
+				jammer: "HomeJammer Name",
 				jammers: [],
 			},
-			scoresAway: {
-				team_name: "Away Team",
-				score: 44,
-				timeouts: 1,
-				jammer: "AwayJamBerry",
+			away: {
+				team_name: "AwayTeam Name",
+				score: 0,
+				timeouts: 3,
+				jammer: "AwayJammer Name",
 				jammers: [],
 			},
+			leadJammer: null, // null, 'home', or 'away'
+
 			timesPeriod: {
 				label: 1,
-				time: 210,
+				time: ( 30 * 60 ),
 			},
 			timesJam: {
-				label: 7,
-				time: 67,
+				label: 1,
+				time: ( 2 * 60 ),
 			},
 		};
 
-		this.setState = this.setState.bind( this );
-
+		this.setLeadJammer   = this.setLeadJammer.bind( this );
 		this.startNextPeriod = this.startNextPeriod.bind( this );
 		this.nextJam   = this.nextJam.bind( this );
 		this.tick      = this.tick.bind( this );
 		this.timeOut   = this.timeOut.bind( this );
 		this.timeIn    = this.timeIn.bind( this );
 
-		this.timeIn()
+		this.setState = this.setState.bind( this );
 	}
-	
+
 	startNextPeriod() {
 		let state = { ...this.state };
 
@@ -57,6 +58,7 @@ class DerbyScores extends React.Component {
 
 		state.timesJam.label = 1;
 		state.timesJam.time = ( 2 * 60 );
+		state.leadJammer = null;
 
 		this.setState( state );
 	}
@@ -66,6 +68,7 @@ class DerbyScores extends React.Component {
 
 		state.timesJam.label++;
 		state.timesJam.time = ( 2 * 60 );
+		state.leadJammer = null;
 
 		this.setState( state );
 	}
@@ -97,10 +100,25 @@ class DerbyScores extends React.Component {
 		}
 	}
 
+	setLeadJammer( which ) {
+		console.log( which );
+		let state = { ...this.state };
+
+		if ( 'home' !== which && 'away' !== which ) {
+			which = null;
+		}
+
+		state.leadJammer = which;
+
+		this.setState( state );
+	}
+
 	render() {
+		/*
 		return (
 			<Dashboard derbyScores={ this } setState={ this.setState } state={ this.state } />
 		);
+		/**/
 		return (
 			<React.Fragment>
 				<Dashboard derbyScores={ this } setState={ this.setState.bind( this ) } state={ this.state } />

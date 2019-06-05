@@ -20,8 +20,13 @@ function ScoreControl( props ) {
 				{ state[ props.whichTeam ].timeouts }
 				<IncrementButton type="+" whichProperty="timeouts" { ...props } />
 			</div>
-			<div className="jammer">
+			<div className={ 'jammer' + ( state.leadJammer === props.whichTeam ? ' lead' : '' ) }>
 				{ state[ props.whichTeam ].jammer }
+				{ ! state.leadJammer &&
+					<button onClick={ () => props.derbyScores.setLeadJammer( props.whichTeam ) }>
+						Make Lead
+					</button>
+				}
 			</div>
 	  </React.Fragment>
 	);
