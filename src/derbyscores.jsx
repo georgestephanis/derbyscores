@@ -164,7 +164,7 @@ class DerbyScores extends React.Component {
 			jam = state.timesJam,
 			msg = 'Period ' + state.timesPeriod.label + ' Jam ' + jam.label +
 				' ended @ ' + jam.time + 's => home +' + jam.home + ' away +' + jam.away +
-				state.leadJammer ? ' <= ' + state.leadJammer + ' was lead jammer.' : '';
+				' <= ' + state[ state.leadJammer ].jammer + ' (' + state[ state.leadJammer ].team_name + ') was lead jammer.';
 
 		state.log.push( msg );
 		console.log( msg );
