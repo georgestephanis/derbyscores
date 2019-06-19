@@ -3,6 +3,7 @@ import React from 'react';
 
 import ScoreControl from './ScoreControl';
 import ClockControl from './ClockControl';
+import JamControl from './JamControl';
 
 class Dashboard extends React.Component {
 
@@ -25,6 +26,7 @@ class Dashboard extends React.Component {
 				<button onClick={ this.props.derbyScores.startNextPeriod }>
 					Next Period
 				</button>
+
 				<section id="scores">
 					<div id="home">
 						<ScoreControl whichTeam="home" { ...this.props } />
@@ -39,7 +41,7 @@ class Dashboard extends React.Component {
 						<ClockControl which="timesPeriod" { ...this.props } />
 					</div>
 					<div id="jam">
-						<ClockControl which="timesJam" { ...this.props } />
+						<JamControl { ...this.props } />
 					</div>
 				</section>
 			</React.Fragment>
