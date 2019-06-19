@@ -55,7 +55,7 @@ class DerbyScores extends React.Component {
 	}
 
 	startNextPeriod() {
-		let state = { ...this.state };
+		const state = { ...this.state };
 
 		state.timesPeriod.label++;
 		state.timesPeriod.time = ( 30 * 60 );
@@ -70,7 +70,7 @@ class DerbyScores extends React.Component {
 	}
 
 	nextJam() {
-		let state = { ...this.state };
+		const state = { ...this.state };
 
 		state.timesJam.label++;
 		state.timesJam.time = ( 2 * 60 );
@@ -82,7 +82,7 @@ class DerbyScores extends React.Component {
 	}
 
 	tick() {
-		let state = { ...this.state };
+		const state = { ...this.state };
 
 		if ( state.timesPeriod.time > 0 ) {
 			state.timesPeriod.time--;
@@ -110,7 +110,7 @@ class DerbyScores extends React.Component {
 
 	setLeadJammer( which ) {
 		console.log( which );
-		let state = { ...this.state };
+		const state = { ...this.state };
 
 		if ( 'home' !== which && 'away' !== which ) {
 			which = null;
