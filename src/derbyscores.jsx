@@ -40,6 +40,8 @@ class DerbyScores extends React.Component {
 				home: 0, // Number of points Home banked this jam
 				away: 0, // Number of points Away banked this jam
 			},
+
+			log: [],
 		};
 
 		this.setLeadJammer   = this.setLeadJammer.bind( this );
@@ -50,11 +52,13 @@ class DerbyScores extends React.Component {
 		this.timeIn    = this.timeIn.bind( this );
 		this.score     = this.score.bind( this );
 		this.timeouts  = this.timeouts.bind( this );
+		this.logJam    = this.logJam.bind( this );
 
 		this.setState = this.setState.bind( this );
 	}
 
 	startNextPeriod() {
+		this.logJam();
 		const state = { ...this.state };
 
 		state.timesPeriod.label++;
@@ -70,6 +74,7 @@ class DerbyScores extends React.Component {
 	}
 
 	nextJam() {
+		this.logJam();
 		const state = { ...this.state };
 
 		state.timesJam.label++;
@@ -109,7 +114,6 @@ class DerbyScores extends React.Component {
 	}
 
 	setLeadJammer( which ) {
-		console.log( which );
 		const state = { ...this.state };
 
 		if ( 'home' !== which && 'away' !== which ) {
@@ -151,6 +155,19 @@ class DerbyScores extends React.Component {
 		const state = { ...this.state };
 
 		state[ which ].timeouts += change;
+
+		this.setState( state );
+	}
+
+	logJam() {
+		const state = { ...this.state },
+			jam = state.timesJam,
+			msg = 'Period ' + state.timesPeriod.label + ' Jam ' + jam.label +
+				' ended @ ' + jam.time + 's => home +' + jam.home + ' away +' + jam.away +
+				state.leadJammer ? ' <= ' + state.leadJammer + ' was lead jammer.' : '';
+
+		state.log.push( msg );
+		console.log( msg );
 
 		this.setState( state );
 	}
