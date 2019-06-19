@@ -9,14 +9,11 @@ class IncrementButton extends React.Component {
 
 	handleClick() {
 		const props = this.props;
-		props.setState( {
-			...props.state,
-			[ props.whichTeam ] : {
-				...props.state[ props.whichTeam ],
-				[ props.whichProperty ]: props.state[ props.whichTeam ][ props.whichProperty ] +
-					( '-' === props.type ? -1 : 1 ),
-			}
-		} )
+
+		props.derbyScores[ props.whichProperty ](
+			props.whichTeam,
+			( '-' === props.type ? -1 : 1 )
+		);
 	}
 	
 	render() {

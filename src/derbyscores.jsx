@@ -46,6 +46,8 @@ class DerbyScores extends React.Component {
 		this.tick      = this.tick.bind( this );
 		this.timeOut   = this.timeOut.bind( this );
 		this.timeIn    = this.timeIn.bind( this );
+		this.score     = this.score.bind( this );
+		this.timeouts  = this.timeouts.bind( this );
 
 		this.setState = this.setState.bind( this );
 	}
@@ -109,6 +111,39 @@ class DerbyScores extends React.Component {
 		}
 
 		state.leadJammer = which;
+
+		this.setState( state );
+	}
+
+	score( which, change ) {
+		if ( 'home' !== which && 'away' !== which ) {
+			return;
+		}
+		if ( 'number' !== typeof change ) {
+			return;
+		}
+		const state = { ...this.state };
+
+		// If this is the first point of the jam,
+		if ( state.timesJam.home === 0 && state.timesJam.away === 0 ) {
+			state.leadJammer = which;
+		}
+
+		state[ which ].score += change;
+
+		this.setState( state );
+	}
+
+	timeouts( which, change ) {
+		if ( 'home' !== which && 'away' !== which ) {
+			return;
+		}
+		if ( 'number' !== typeof change ) {
+			return;
+		}
+		const state = { ...this.state };
+
+		state[ which ].timeouts += change;
 
 		this.setState( state );
 	}
