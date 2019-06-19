@@ -37,6 +37,8 @@ class DerbyScores extends React.Component {
 			timesJam: {
 				label: 1,
 				time: ( 2 * 60 ),
+				home: 0, // Number of points Home banked this jam
+				away: 0, // Number of points Away banked this jam
 			},
 		};
 
@@ -60,6 +62,8 @@ class DerbyScores extends React.Component {
 
 		state.timesJam.label = 1;
 		state.timesJam.time = ( 2 * 60 );
+		state.timesJam.home = 0;
+		state.timesJam.away = 0;
 		state.leadJammer = null;
 
 		this.setState( state );
@@ -70,6 +74,8 @@ class DerbyScores extends React.Component {
 
 		state.timesJam.label++;
 		state.timesJam.time = ( 2 * 60 );
+		state.timesJam.home = 0;
+		state.timesJam.away = 0;
 		state.leadJammer = null;
 
 		this.setState( state );
@@ -130,6 +136,7 @@ class DerbyScores extends React.Component {
 		}
 
 		state[ which ].score += change;
+		state.timesJam[ which ] += change;
 
 		this.setState( state );
 	}
