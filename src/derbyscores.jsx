@@ -34,7 +34,7 @@ class DerbyScores extends React.Component {
 				label: 1,
 				time: ( 30 * 60 ),
 			},
-			timesJam: {
+			jam: {
 				label: 1,
 				time: ( 2 * 60 ),
 				home: 0, // Number of points Home banked this jam
@@ -64,10 +64,10 @@ class DerbyScores extends React.Component {
 		state.timesPeriod.label++;
 		state.timesPeriod.time = ( 30 * 60 );
 
-		state.timesJam.label = 1;
-		state.timesJam.time = ( 2 * 60 );
-		state.timesJam.home = 0;
-		state.timesJam.away = 0;
+		state.jam.label = 1;
+		state.jam.time = ( 2 * 60 );
+		state.jam.home = 0;
+		state.jam.away = 0;
 		state.leadJammer = null;
 
 		this.setState( state );
@@ -77,10 +77,10 @@ class DerbyScores extends React.Component {
 		this.logJam();
 		const state = { ...this.state };
 
-		state.timesJam.label++;
-		state.timesJam.time = ( 2 * 60 );
-		state.timesJam.home = 0;
-		state.timesJam.away = 0;
+		state.jam.label++;
+		state.jam.time = ( 2 * 60 );
+		state.jam.home = 0;
+		state.jam.away = 0;
 		state.leadJammer = null;
 
 		this.setState( state );
@@ -92,8 +92,8 @@ class DerbyScores extends React.Component {
 		if ( state.timesPeriod.time > 0 ) {
 			state.timesPeriod.time--;
 		}
-		if ( state.timesJam.time > 0 ) {
-			state.timesJam.time--;
+		if ( state.jam.time > 0 ) {
+			state.jam.time--;
 
 		}
 
@@ -135,12 +135,12 @@ class DerbyScores extends React.Component {
 		const state = { ...this.state };
 
 		// If this is the first point of the jam,
-		if ( state.timesJam.home === 0 && state.timesJam.away === 0 ) {
+		if ( state.jam.home === 0 && state.jam.away === 0 ) {
 			state.leadJammer = which;
 		}
 
 		state[ which ].score += change;
-		state.timesJam[ which ] += change;
+		state.jam[ which ] += change;
 
 		this.setState( state );
 	}
@@ -161,7 +161,7 @@ class DerbyScores extends React.Component {
 
 	logJam() {
 		const state = { ...this.state },
-			jam = state.timesJam,
+			jam = state.jam,
 			msg = 'Period ' + state.timesPeriod.label + ' Jam ' + jam.label +
 				' ended @ ' + jam.time + 's => home +' + jam.home + ' away +' + jam.away +
 				' <= ' + state[ state.leadJammer ].jammer + ' (' + state[ state.leadJammer ].team_name + ') was lead jammer.';

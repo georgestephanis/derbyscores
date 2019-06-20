@@ -2,7 +2,7 @@
 import React from 'react';
 
 function JamControl( props ) {
-	const jam = props.state.timesJam,
+	const jam = props.state.jam,
 		min = Math.floor( jam.time / 60 ),
 		sec = jam.time % 60;
 

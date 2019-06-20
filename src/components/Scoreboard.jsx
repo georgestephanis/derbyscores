@@ -21,7 +21,7 @@ function Scoreboard( props ) {
 				<Clock { ...props.timesPeriod } />
 			</div>
 			<div id="jam">
-				<Clock { ...props.timesJam } />
+				<Clock { ...props.jam } />
 			</div>
 		</section>
 		</React.Fragment>
