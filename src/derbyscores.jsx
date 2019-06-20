@@ -65,13 +65,13 @@ class DerbyScores extends React.Component {
 		switch ( e.keyCode ) {
 			case 37:
 				this.score( 'home', 1 );
-				break;
+				return false;
 			case 39:
 				this.score( 'away', 1 );
-				break;
+				return false;
 			case 40:
 				this.nextJam();
-				break;
+				return false;
 		}
 	}
 
