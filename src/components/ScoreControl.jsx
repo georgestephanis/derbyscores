@@ -23,7 +23,7 @@ function ScoreControl( props ) {
 			<div className={ 'jammer' + ( state.leadJammer === props.whichTeam ? ' lead' : '' ) }>
 				{ state[ props.whichTeam ].jammer }
 				{ ! state.leadJammer &&
-					<button onClick={ () => props.derbyScores.setLeadJammer( props.whichTeam ) }>
+					<button onClick={ () => props.setLeadJammer( props.whichTeam ) }>
 						Make Lead
 					</button>
 				}
