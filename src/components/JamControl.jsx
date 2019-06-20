@@ -11,8 +11,14 @@ function JamControl( props ) {
 			<div className="label">
 				{ jam.label }
 			</div>
+			<div className={ "home jam-score" + ( 'home' === props.state.leadJammer ? ' lead' : '' ) }>
+				{ jam.home }
+			</div>
 			<div className="time">
 				{ min + ':' + sec.toString(10).padStart(2,'0') }
+			</div>
+			<div className={ "away jam-score" + ( 'away' === props.state.leadJammer ? ' lead' : '' ) }>
+				{ jam.away }
 			</div>
 		</React.Fragment>
 	);

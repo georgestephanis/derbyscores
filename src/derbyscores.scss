@@ -86,8 +86,26 @@ body {
         content: 'Jam ';
       }
     }
-    .time {
+    .jam-score {
+      display: inline-block;
+      font-size: 4em;
+      width: 1em;
 
+      &.home {
+        margin-right: 0.25em;
+        text-align: right;
+      }
+      &.away {
+        margin-left: 0.25em;
+        text-align: left;
+      }
+      &.lead {
+        color: #ff0;
+      }
+    }
+    .time {
+      display: inline-block;
+      margin-bottom: 0.25em;
     }
   }
 
