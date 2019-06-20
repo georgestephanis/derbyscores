@@ -52,6 +52,7 @@ class DerbyScores extends React.Component {
 		this.score     = this.score.bind( this );
 		this.timeouts  = this.timeouts.bind( this );
 		this.logJam    = this.logJam.bind( this );
+		this.log       = this.log.bind( this );
 
 		this.setState = this.setState.bind( this );
 	}
@@ -159,15 +160,17 @@ class DerbyScores extends React.Component {
 	}
 
 	logJam() {
-		const state = { ...this.state },
-			jam = state.jam,
-			msg = 'Period ' + state.period.label + ' Jam ' + jam.label +
-				' ended @ ' + jam.time + 's => home +' + jam.home + ' away +' + jam.away +
-				' <= ' + state[ state.leadJammer ].jammer + ' (' + state[ state.leadJammer ].team_name + ') was lead jammer.';
+		const state = this.state,
+			jam = state.jam;
 
+		this.log( 'Period ' + state.period.label + ' Jam ' + jam.label +
+			' ended @ ' + jam.time + 's => home +' + jam.home + ' away +' + jam.away +
+			' <= ' + state[ state.leadJammer ].jammer + ' (' + state[ state.leadJammer ].team_name + ') was lead jammer.' );
+	}
+
+	log( msg ) {
+		const state = { ...this.state };
 		state.log.push( msg );
-		console.log( msg );
-
 		this.setState( state );
 	}
 

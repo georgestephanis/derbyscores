@@ -4,6 +4,7 @@ import React from 'react';
 import ScoreControl from './ScoreControl';
 import ClockControl from './ClockControl';
 import JamControl from './JamControl';
+import Log from './Log';
 
 class Dashboard extends React.Component {
 
@@ -44,6 +45,8 @@ class Dashboard extends React.Component {
 						<JamControl { ...this.props } />
 					</div>
 				</section>
+
+				<Log log={ this.props.state.log } />
 			</React.Fragment>
 		)
   }
