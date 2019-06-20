@@ -172,14 +172,14 @@ class DerbyScores extends React.Component {
 	}
 
 	render() {
-		/*
+		/* */
 		return (
-			<Dashboard derbyScores={ this } setState={ this.setState } state={ this.state } />
+			<Dashboard { ...this } />
 		);
 		/**/
 		return (
 			<React.Fragment>
-				<Dashboard derbyScores={ this } setState={ this.setState.bind( this ) } state={ this.state } />
+				<Dashboard { ...this } />
 				<NewWindow name="ScoreboardWindow" >
 					<Scoreboard { ...this.state } />
 				</NewWindow>

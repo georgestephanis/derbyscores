@@ -10,7 +10,7 @@ class IncrementButton extends React.Component {
 	handleClick() {
 		const props = this.props;
 
-		props.derbyScores[ props.whichProperty ](
+		props[ props.whichProperty ](
 			props.whichTeam,
 			( '-' === props.type ? -1 : 1 )
 		);
