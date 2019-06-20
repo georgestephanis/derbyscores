@@ -28,7 +28,7 @@ class DerbyScores extends React.Component {
 				jammer: "AwayJammer Name",
 				jammers: [],
 			},
-			timesPeriod: {
+			period: {
 				label: 1,
 				time: ( 30 * 60 ),
 			},
@@ -60,8 +60,8 @@ class DerbyScores extends React.Component {
 		this.logJam();
 		const state = { ...this.state };
 
-		state.timesPeriod.label++;
-		state.timesPeriod.time = ( 30 * 60 );
+		state.period.label++;
+		state.period.time = ( 30 * 60 );
 
 		state.jam.label = 1;
 		state.jam.time = ( 2 * 60 );
@@ -88,8 +88,8 @@ class DerbyScores extends React.Component {
 	tick() {
 		const state = { ...this.state };
 
-		if ( state.timesPeriod.time > 0 ) {
-			state.timesPeriod.time--;
+		if ( state.period.time > 0 ) {
+			state.period.time--;
 		}
 		if ( state.jam.time > 0 ) {
 			state.jam.time--;
@@ -161,7 +161,7 @@ class DerbyScores extends React.Component {
 	logJam() {
 		const state = { ...this.state },
 			jam = state.jam,
-			msg = 'Period ' + state.timesPeriod.label + ' Jam ' + jam.label +
+			msg = 'Period ' + state.period.label + ' Jam ' + jam.label +
 				' ended @ ' + jam.time + 's => home +' + jam.home + ' away +' + jam.away +
 				' <= ' + state[ state.leadJammer ].jammer + ' (' + state[ state.leadJammer ].team_name + ') was lead jammer.';
 

@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
 
 				<section id="times">
 					<div id="period">
-						<ClockControl which="timesPeriod" { ...this.props } />
+						<ClockControl which="period" { ...this.props } />
 					</div>
 					<div id="jam">
 						<JamControl { ...this.props } />

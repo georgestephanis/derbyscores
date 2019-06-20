@@ -18,7 +18,7 @@ function Scoreboard( props ) {
 	
 		<section id="times">
 			<div id="period">
-				<Clock { ...props.timesPeriod } />
+				<Clock { ...props.period } />
 			</div>
 			<div id="jam">
 				<Clock { ...props.jam } />
