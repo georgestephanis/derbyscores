@@ -28,8 +28,6 @@ class DerbyScores extends React.Component {
 				jammer: "AwayJammer Name",
 				jammers: [],
 			},
-			leadJammer: null, // null, 'home', or 'away'
-
 			timesPeriod: {
 				label: 1,
 				time: ( 30 * 60 ),
@@ -41,6 +39,7 @@ class DerbyScores extends React.Component {
 				away: 0, // Number of points Away banked this jam
 			},
 
+			leadJammer: null, // null, 'home', or 'away'
 			log: [],
 		};
 
