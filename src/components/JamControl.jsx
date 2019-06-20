@@ -20,6 +20,9 @@ function JamControl( props ) {
 			<div className={ "away jam-score" + ( 'away' === props.state.leadJammer ? ' lead' : '' ) }>
 				{ jam.away }
 			</div>
+			<button className="nextJam" onClick={ props.nextJam }>
+				Next Jam
+			</button>
 		</React.Fragment>
 	);
 }
