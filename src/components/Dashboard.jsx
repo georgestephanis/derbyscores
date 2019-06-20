@@ -46,6 +46,10 @@ class Dashboard extends React.Component {
 					</div>
 				</section>
 
+				<footer>
+					Keyboard Navigation: <kbd>&larr;</kbd>: Home Score <kbd>&rarr;</kbd>: Away Score <kbd>&darr;</kbd>: Next Jam
+				</footer>
+
 				<Log log={ this.props.state.log } />
 			</React.Fragment>
 		)

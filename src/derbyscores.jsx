@@ -53,8 +53,26 @@ class DerbyScores extends React.Component {
 		this.timeouts  = this.timeouts.bind( this );
 		this.logJam    = this.logJam.bind( this );
 		this.log       = this.log.bind( this );
+		this.onkeydown = this.onkeydown.bind( this );
 
 		this.setState = this.setState.bind( this );
+
+		document.onkeydown = this.onkeydown;
+	}
+
+	onkeydown( e ) {
+		e = e || window.event;
+		switch ( e.keyCode ) {
+			case 37:
+				this.score( 'home', 1 );
+				break;
+			case 39:
+				this.score( 'away', 1 );
+				break;
+			case 40:
+				this.nextJam();
+				break;
+		}
 	}
 
 	startNextPeriod() {
